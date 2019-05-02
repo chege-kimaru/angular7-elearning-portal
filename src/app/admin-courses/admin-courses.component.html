@@ -1,0 +1,19 @@
+<div>
+    <div class="jumbotron">
+      <h4 class="text-center text-primary">ALL Courses</h4>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-3" *ngFor="let course of courseService.adminCourses">
+      <div class="card">
+        <img [src]="course.imageUrl" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">{{course.name}}</h5>
+          <h6 class="card-subtitle mb-2 text-muted">{{course.instructorName}}</h6>
+          <a routerLink="/home/courses/{{course.id}}" class="btn btn-primary">View</a>&nbsp;
+          <a *ngIf="!course.verified" (click)="activate(course.id)" class="btn btn-success">Activate</a>&nbsp;
+          <a *ngIf="course.verified" (click)="suspend(course.id)" class="btn btn-warning">Suspend</a>
+        </div>
+      </div>
+    </div>
+  </div>

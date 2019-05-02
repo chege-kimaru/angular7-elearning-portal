@@ -1,0 +1,91 @@
+<div class="card">
+  <div class="card-body">
+    <strong>
+      <h4 class="text-center text-primary">{{topicService.currentTopic?.title}} <span *ngIf="topicService.currentTopic?.completed" class="badge badge-success">Completed</span></h4>
+    </strong>
+    <span [innerHTML]="topicService.currentTopic?.content"></span>
+  </div>
+  <div class="card-footer">
+    <div class="row">
+      <div class="col-sm-3" *ngIf="courseService.currentCourse?.isInstructor">
+          <button data-toggle="modal"
+          data-target="#confirmDeleteTopicModal" class="btn btn-danger btn-block">Delete Topic</button>
+          <button data-toggle="modal"
+          data-target="#editTopicModal" class="btn btn-success btn-block">Edit Topic</button>
+          <button routerLink="/n-topic-quizes/{{topicService.currentTopic?.id}}" class="btn btn-primary btn-block">Manage Quizes</button>
+      </div>
+      <div class="col-sm-9">
+          <h4>Quizes</h4>
+          <p>Please attempt the folowing quiz(es)</p>
+          <app-topic-quizes></app-topic-quizes>
+          <button (click)="markAsComplete(topicService.currentTopic.id)" *ngIf="!topicService.currentTopic?.requireQuiz" class="btn btn-success btn-block">Mark as complete</button>
+      </div> 
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="confirmDeleteTopicModal" tabindex="-1" role="dialog" 
+aria-labelledby="confirmDeleteTopicModalTitle"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="confirmDeleteTopicModalTitle">Delete Topic</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Please Confirm Topic Deletion. Note:// This process is irreversible</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="deleteTopic()">Confirm</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal"
+  id="editTopicModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="editTopicModalTitle"
+  aria-hidden="true"
+>
+  <div
+    class="modal-dialog modal-lg"
+    role="document"
+  >
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5
+          class="modal-title"
+          id="editTopicModalTitle"
+        >Edit Topic</h5>
+
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div class="modal-body">
+          <app-edit-topic></app-edit-topic>
+      </div>
+
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-secondary"
+          data-dismiss="modal"
+        >Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,20 @@
+<form
+  [formGroup]="form"
+  (ngSubmit)="onSubmit(form)"
+>
+  <div class="form-group">
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Title"
+      [class.is-invalid]="!form.controls['title'].valid && form.controls['title'].touched"
+      [formControl]="form.controls['title']"
+    />
+  </div>
+
+  <button
+    [disabled]="!form.valid"
+    type="submit"
+    class="btn btn-success"
+  >Add</button> 
+</form>

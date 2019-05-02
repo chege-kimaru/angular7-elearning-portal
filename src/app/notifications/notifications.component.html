@@ -1,0 +1,17 @@
+<div class="list-group">
+    <li 
+    *ngFor="let notification of notificationService.userNotifications" 
+    (click)="setViewed(notification)" 
+    class="list-group-item list-group-item-action flex-column align-items-start"
+    [class.active]="selectedNotification?.id == notification.id"
+    >
+      <div class="d-flex w-100 justify-content-between">
+        <h5 class="mb-1">{{notification.topic}}</h5>
+        <small *ngIf="!notification.viewed">
+            <span class="badge badge-success">New</span>
+        </small>
+      </div>
+      <p class="mb-1">{{notification.details}}</p>
+      <small>{{notification.dateAddedFormatted}}</small>
+    </li>
+  </div>

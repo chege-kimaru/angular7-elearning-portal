@@ -1,0 +1,27 @@
+<div>
+  <div class="jumbotron">
+    <h4 class="text-center text-primary">Scheduled Courses</h4>
+  </div>
+</div>
+<div class="row">
+  <div class="col-lg-4" 
+  *ngFor="let course of courseService.userIncompleteCourses">
+    <div class="card">
+      <img [src]="course.imageUrl" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">{{course.name}}</h5>
+        <h6 class="card-subtitle mb-2 text-muted">{{course.instructorName}}</h6>
+        <p>Registration Date: </p><b>{{course.dateAdded}}</b>
+        <p>Progress </p>
+        <div class="progress">
+          <div class="progress-bar progress-bar-info progress-bar-striped" 
+          role="progressbar" attr.aria-valuenow="{{course.progress}}"
+    aria-valuemin="0" aria-valuemax="100" [ngStyle]="{width:course.progress+'%'}">
+    {{course.progress}}%</div>
+        </div>
+        <br>
+        <div><a routerLink="/home/courses/{{course.id}}" class="btn btn-primary">View</a></div>
+      </div>
+    </div>
+  </div>
+</div>

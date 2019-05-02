@@ -1,0 +1,28 @@
+<form
+  [formGroup]="form"
+  (ngSubmit)="onSubmit(form)"
+>
+  <div class="form-group">
+    <input
+      [(ngModel)]="courseService.currentCourse && courseService.currentCourse.name"
+      type="text"
+      class="form-control"
+      placeholder="Title"
+      [class.is-invalid]="!form.controls['name'].valid && form.controls['name'].touched"
+      [formControl]="form.controls['name']"
+    />
+  </div>
+  <div class="form-check">
+      <input 
+      [(ngModel)]="courseService.currentCourse && courseService.currentCourse.shown"
+      [class.is-invalid]="!form.controls['shown'].valid && form.controls['shown'].touched"
+      [formControl]="form.controls['shown']" type="checkbox" class="form-check-input" id="shownCheckbox">
+      <label class="form-check-label" for="shownCheckbox">Make Course Available</label>
+  </div>
+
+  <button
+    [disabled]="!form.valid"
+    type="submit"
+    class="btn btn-success"
+  >Save and update</button>
+</form>

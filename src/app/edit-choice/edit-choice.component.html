@@ -1,0 +1,28 @@
+<form
+  [formGroup]="form"
+  (ngSubmit)="onSubmit(form)"
+>
+  <div class="form-group">
+    <input
+    [(ngModel)]="choiceService.currentChoice && choiceService.currentChoice.content"
+      type="text"
+      class="form-control"
+      placeholder="Choice"
+      [class.is-invalid]="!form.controls['content'].valid && form.controls['content'].touched"
+      [formControl]="form.controls['content']"
+    /> 
+    <div class="form-check">
+      <input 
+      [checked]="choiceService.currentChoice && choiceService.currentChoice.isAnswer"
+      [class.is-invalid]="!form.controls['isAnswer'].valid && form.controls['isAnswer'].touched"
+      [formControl]="form.controls['isAnswer']" type="checkbox" class="form-check-input" id="shownCheckbox">
+      <label class="form-check-label" for="shownCheckbox">Is Answer?</label>
+  </div>
+  </div>
+
+  <button
+    [disabled]="!form.valid"
+    type="submit"
+    class="btn btn-success"
+  >Save and Update</button>
+</form>

@@ -1,0 +1,235 @@
+<div class="row">
+  <div class="col-lg-4">
+    
+    <img
+    #img
+    [src]="'assets/images/avatar1.jpeg' || authService.loggedInUser?.imageUrl"
+      class="rounded mx-auto d-block"
+      alt=""
+      style="width: 200px; height: 200px;"
+    >
+    <hr>
+    <button data-toggle="modal"
+    data-target="#imageUploadModal" class="btn btn-success"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+  </div>
+
+  <div class="col-lg-6">
+    <table class="table">
+      <tbody>
+        <tr>
+          <th>Role</th>
+
+          <td>
+            <span class="badge badge-success">
+              {{authService.loggedInUser && authService.loggedInUser.roleName}}
+            </span>
+          </td>
+        </tr>
+
+        <tr>
+          <th>Name</th>
+
+          <td>
+            {{authService.loggedInUser && authService.loggedInUser.fullName}}
+          </td>
+        </tr>
+
+        <tr>
+          <th>Email</th>
+
+          <td>
+            {{authService.loggedInUser && authService.loggedInUser.email}}
+          </td>
+        </tr>
+
+        <tr>
+          <th>Address</th>
+
+          <td>
+            {{authService.loggedInUser && authService.loggedInUser.fullAddress}}
+          </td>
+        </tr>
+
+        <tr>
+          <th>Id Number</th>
+
+          <td>
+            {{authService.loggedInUser && authService.loggedInUser.idNumber}}
+          </td>
+        </tr>
+
+        <tr>
+          <th>Phone Number</th>
+
+          <td>
+            {{authService.loggedInUser && authService.loggedInUser.phoneNumber}}
+          </td>
+        </tr>
+
+        <!-- <tr>
+          <th>Courses Done</th>
+
+          <td>
+            <span class="badge badge-secondary">4</span>
+          </td>
+        </tr>
+
+        <tr>
+          <th>Courses In Progress</th>
+
+          <td>
+            <span class="badge badge-primary">3</span>
+          </td>
+        </tr> -->
+      </tbody>
+    </table>
+  </div>
+
+  <div class="col-lg-2">
+    <button
+      (click)="authService.logout()"
+      class="btn btn-secondary btn-block btn-lg"
+    >Log out</button>
+
+    <button
+      [routerLink]="[ '../edit-profile']"
+      class="btn btn-success btn-block btn-lg"
+    >Edit</button>
+
+    <button
+      *ngIf="!authService.isInstructor()"
+      [routerLink]="[ '../apply-instructor']"
+      class="btn btn-primary btn-block btn-lg"
+    >Become Instructor</button>
+  </div>
+</div>
+
+<hr>
+
+<div>
+  <button
+    [hidden]="!authService.isInstructor()"
+    class="btn btn-success btn-lg"
+    data-toggle="modal"
+    data-target="#addCourseModal"
+  >Add Course &nbsp;
+    <i
+      class="fa fa-plus"
+      aria-hidden="true"
+    ></i>
+  </button>
+
+  <hr>
+
+  <div class="row">
+    <div
+      class="col-lg-3"
+      *ngFor="let course of courseService.instructorCourses"
+    >
+      <div class="card">
+        <img
+        [src]="course.imageUrl"
+          class="card-img-top"
+          alt="..."
+        >
+
+        <div class="card-body">
+          <h5 class="card-title">{{course.name}}</h5>
+
+          <a
+            routerLink="/home/courses/{{course.id}}"
+            class="btn btn-primary"
+          >View</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal"
+  id="addCourseModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="addCourseModalTitle"
+  aria-hidden="true"
+>
+  <div
+    class="modal-dialog"
+    role="document"
+  >
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5
+          class="modal-title"
+          id="addCourseModalTitle"
+        >Add Course</h5>
+
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div class="modal-body">
+          <app-add-course></app-add-course>
+      </div>
+
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-secondary"
+          data-dismiss="modal"
+        >Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal"
+  id="imageUploadModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="imageUploadModalTitle"
+  aria-hidden="true"
+>
+  <div
+    class="modal-dialog"
+    role="document"
+  >
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5
+          class="modal-title"
+          id="imageUploadModalTitle"
+        >Change Profile Picture</h5>
+
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <image-upload url="{{imageUrl}}" [max]="1" (uploadFinished)="onUploadFinished(img)"></image-upload>
+      </div>
+
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-secondary"
+          data-dismiss="modal"
+        >Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>

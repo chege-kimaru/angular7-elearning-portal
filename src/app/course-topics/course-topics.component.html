@@ -1,0 +1,7 @@
+<div class="list-group">
+  <li
+  *ngFor="let topic of topicService.courseTopics" 
+  (click)="selectTopic(topic)"
+   class="list-group-item list-group-item-action"
+   [class.active]="topic.id === topicService.currentTopic?.id">{{topic.title}}</li>
+</div>

@@ -1,0 +1,26 @@
+<div class="container">
+  <h4>{{quizService.currentQuiz?.title}}</h4>
+  <h4 *ngIf="quizService.currentQuiz?.completed">Score &nbsp; <span>{{quizService.currentQuiz?.marks}}</span> </h4>
+  <div *ngFor="let question of questionService.questionsForQuiz; let i = index">
+    <label for="">{{i + 1}} {{question.content}}</label>
+    <div class="form-check" *ngFor="let choice of question.choices">
+      <input 
+        [disabled]="quizService.currentQuiz?.completed" 
+        [checked]="quizService.currentQuiz?.completed && question.userSelected == choice.id"
+        [class.is-valid]="quizService.currentQuiz?.completed && choice.isAnswer" 
+        [class.is-invalid]="!question.userCorrect  && question.userSelected == choice.id"
+        class="form-check-input" type="radio" 
+        (change)="onSelect(question.id, choice.id)" 
+        name="{{question.id}}"
+        required="required">
+      <label class="form-check-label" for="{{question.id}}">
+        {{choice.content}}
+      </label>
+    </div>
+  </div>
+  <div>
+    <button 
+    [hidden]="quizService.currentQuiz?.completed" type="submit" 
+    (click)="submitQuiz()" class="btn btn-success">Submit</button>
+  </div>
+</div>

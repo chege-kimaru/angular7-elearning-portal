@@ -1,0 +1,89 @@
+<div class="container-fluid h-100">
+    <div class="row justify-content-center h-100">
+      <div class="col-md-12 chat">
+        <div class="card">
+          <div class="card-body msg_card_body" #scrollMe >
+            <div *ngFor="let chat of chatService.courseChats" class="d-flex justify-content-start mb-4" [class.justify-content-start] = "authService.loggedInUser?.id != chat.user"
+            [class.justify-content-end] = "authService.loggedInUser?.id == chat.user">
+              <div class="img_cont_msg">
+                <img src="assets/images/avatar2.png" class="rounded-circle user_img_msg">
+              </div>
+              <div class="msg_cotainer"
+              [class.msg_cotainer] = "authService.loggedInUser?.id != chat.user"
+              [class.msg_cotainer_send] = "authService.loggedInUser?.id == chat.user">
+                <p>
+                  <em style="font-size: 10px;">~{{chat.username}}</em>
+                  <br>
+                  <strong style="font-size: 14px;">{{chat.message}}</strong>
+                  <br>
+                  <span style="font-size: 10px; color: white;">{{chat.dateAddedFormatted}}</span>
+                </p>
+              </div>
+            </div>
+            <!-- <div class="d-flex justify-content-end mb-4">
+              <div class="msg_cotainer_send">
+                Hi Maryam i am good tnx how about you?
+                <span class="msg_time_send">8:55 AM, Today</span>
+              </div>
+              <div class="img_cont_msg">
+            <img src="assets/images/avatar1.jpeg" class="rounded-circle user_img_msg">
+              </div>
+            </div>
+            <div class="d-flex justify-content-start mb-4">
+              <div class="img_cont_msg">
+                <img src="https://devilsworkshop.org/files/2013/01/enlarged-facebook-profile-picture.jpg" class="rounded-circle user_img_msg">
+              </div>
+              <div class="msg_cotainer">
+                I am good too, thank you for your chat template
+                <span class="msg_time">9:00 AM, Today</span>
+              </div>
+            </div>
+            <div class="d-flex justify-content-end mb-4">
+              <div class="msg_cotainer_send">
+                You welcome Maryam
+                <span class="msg_time_send">9:05 AM, Today</span>
+              </div>
+              <div class="img_cont_msg">
+            <img src="assets/images/avatar1.jpeg" class="rounded-circle user_img_msg">
+              </div>
+            </div>
+            <div class="d-flex justify-content-start mb-4">
+              <div class="img_cont_msg">
+                <img src="https://devilsworkshop.org/files/2013/01/enlarged-facebook-profile-picture.jpg" class="rounded-circle user_img_msg">
+              </div>
+              <div class="msg_cotainer">
+                I am looking for your next templates
+                <span class="msg_time">9:07 AM, Today</span>
+              </div>
+            </div>
+            <div class="d-flex justify-content-end mb-4">
+              <div class="msg_cotainer_send">
+                Ok, thank you have a good day
+                <span class="msg_time_send">9:10 AM, Today</span>
+              </div>
+              <div class="img_cont_msg">
+          <img src="assets/images/avatar1.jpeg" class="rounded-circle user_img_msg">
+              </div>
+            </div>
+            <div class="d-flex justify-content-start mb-4">
+              <div class="img_cont_msg">
+                <img src="https://devilsworkshop.org/files/2013/01/enlarged-facebook-profile-picture.jpg" class="rounded-circle user_img_msg">
+              </div>
+              <div class="msg_cotainer">
+                Bye, see you
+                <span class="msg_time">9:12 AM, Today</span>
+              </div>
+            </div> -->
+          </div>
+          <div class="card-footer">
+            <div class="input-group">
+              <textarea [(ngModel)]="message" class="form-control type_msg" placeholder="Type your message..."></textarea>
+              <div class="input-group-append" (click)="sendMessage()">
+                <span class="input-group-text send_btn"><i class="fas fa-location-arrow"></i></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,35 @@
+<form
+  [formGroup]="form"
+  (ngSubmit)="onSubmit(form)"
+>
+  <div class="form-group">
+    <input
+      [(ngModel)]="quizService.currentQuiz && quizService.currentQuiz.title"
+      type="text"
+      class="form-control"
+      placeholder="Title"
+      [class.is-invalid]="!form.controls['title'].valid && form.controls['title'].touched"
+      [formControl]="form.controls['title']"
+    />
+  </div>
+  <div class="form-check">
+      <input 
+      [(ngModel)]="quizService.currentQuiz && quizService.currentQuiz.shown"
+      [class.is-invalid]="!form.controls['shown'].valid && form.controls['shown'].touched"
+      [formControl]="form.controls['shown']" type="checkbox" class="form-check-input" id="shownCheckbox">
+      <label class="form-check-label" for="shownCheckbox">Make Quiz Available</label>
+  </div>
+  <div class="form-check">
+      <input 
+      [(ngModel)]="quizService.currentQuiz && quizService.currentQuiz.must"
+      [class.is-invalid]="!form.controls['must'].valid && form.controls['must'].touched"
+      [formControl]="form.controls['must']" type="checkbox" class="form-check-input" id="shownCheckbox">
+      <label class="form-check-label" for="shownCheckbox">Make Quiz Compulsory</label>
+  </div>
+
+  <button
+    [disabled]="!form.valid"
+    type="submit"
+    class="btn btn-success"
+  >Save and Update</button>
+</form>

@@ -1,0 +1,21 @@
+<form
+  [formGroup]="form"
+  (ngSubmit)="onSubmit(form)"
+>
+  <div class="form-group">
+    <input
+      [(ngModel)]="questionService.currentQuestion && questionService.currentQuestion.content"
+      type="text"
+      class="form-control"
+      placeholder="Question"
+      [class.is-invalid]="!form.controls['content'].valid && form.controls['content'].touched"
+      [formControl]="form.controls['content']"
+    />
+  </div>
+
+  <button
+    [disabled]="!form.valid"
+    type="submit"
+    class="btn btn-success"
+  >Save and Update</button>
+</form>

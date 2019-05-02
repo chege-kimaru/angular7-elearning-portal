@@ -1,0 +1,20 @@
+<div>
+  <div class="jumbotron">
+    <h4 class="text-center text-primary">Completed Courses</h4>
+  </div>
+</div>
+<div class="row">
+  <div class="col-lg-4" *ngFor="let course of courseService.userCompletedCourses">
+    <div class="card">
+      <img [src]="course.imageUrl" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">{{course.name}}</h5>
+        <h6 class="card-subtitle mb-2 text-muted">{{course.instructorName}}</h6>
+        <p>Registration Date: </p><b>{{course.dateAdded}}</b>
+        <p>Completion Date: </p><b>{{course.lastUpdated}}</b>
+        <p>GRADE </p><b>{{course.marks}}</b>
+        <p><a routerLink="/home/courses/{{course.id}}" class="btn btn-primary">View</a></p>
+      </div>
+    </div>
+  </div>
+</div>

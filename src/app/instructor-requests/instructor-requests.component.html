@@ -1,0 +1,23 @@
+<div class="row">
+  <div class="col-lg-4">
+      <div class="list-group">
+          <a
+          *ngFor="let request of requestService.instructorRequests"
+          (click)="selectRequest(request)"
+          [class.active]="request.id === requestService.currentRequest?.id"
+           class="list-group-item list-group-item-action flex-column align-items-start active">
+            <div class="d-flex w-100 justify-content-between">
+              <h5 class="mb-1">{{request.topic}}</h5>
+              <small *ngIf="!request.received">
+                  <span class="badge badge-success">New</span>
+              </small>
+            </div>
+            <p class="mb-1">{{request.user?.fullName}}</p>
+            <small>{{request.dateAddedFormatted}}</small>
+          </a>
+      </div>
+  </div>
+  <div class="col-lg-8">
+      <app-single-instructor-request *ngIf="requestService.currentRequest"></app-single-instructor-request>
+  </div>
+</div>

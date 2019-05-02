@@ -1,0 +1,294 @@
+<div class="row">
+  <div class="col-lg-4">
+    <img #img [src]="'assets/images/city2.jpg' || courseService.currentCourse?.imageUrl" class="rounded mx-auto d-block" alt="" style="width: 200px; height: 200px;">
+    <hr>
+    <button data-toggle="modal"
+    *ngIf="courseService.currentCourse?.isInstructor"
+    data-target="#courseImageUploadModal" class="btn btn-success"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+  </div>
+  <div class="col-lg-6">
+    <table class="table">
+      <tbody>
+        <tr>
+          <th>Name</th>
+          <td>{{courseService.currentCourse?.name}}</td>
+        </tr>
+        <tr>
+          <th>Date Added</th>
+          <td>{{courseService.currentCourse?.formattedDateAdded}}</td>
+        </tr>
+        <tr>
+          <th>Instructor</th>
+          <td>{{courseService.currentCourse?.instructorName}}</td>
+        </tr>
+        <tr *ngIf="!courseService.currentCourse?.isInstructor">
+          <th>Status</th>
+          <td *ngIf="courseService.currentCourse?.registered"><span class="badge badge-primary">Registered</span></td>
+          <td *ngIf="!courseService.currentCourse?.registered"><span class="badge badge-secondary">Not Registered</span></td>
+          <td *ngIf="courseService.currentCourse?.completed"><span class="badge badge-success">Completed</span></td>
+        </tr>
+      </tbody>
+    </table> 
+  </div>
+  <div class="col-lg-2">
+    <div *ngIf="!courseService.currentCourse?.registered && !courseService.currentCourse?.isInstructor"><button class="btn btn-primary" data-toggle="modal"
+        data-target="#confirmUnitRegistrationModal">Register</button>
+      <hr>
+    </div>
+    <div *ngIf="courseService.currentCourse?.registered || courseService.currentCourse?.isInstructor"><button class="btn btn-primary" data-toggle="modal"
+      data-target="#confirmUnitRegistrationModal" data-toggle="modal"
+      data-target="#chatRoomModal">Chat Room</button>
+    <hr>
+  </div>
+    <div *ngIf="courseService.currentCourse?.isInstructor"><button data-toggle="modal"
+      data-target="#editCourseModal" class="btn btn-success">Edit</button>
+      <hr>
+    </div>
+    <div *ngIf="courseService.currentCourse?.isInstructor"><button 
+      data-toggle="modal"
+      data-target="#confirmDeleteCourseModal"
+      class="btn btn-danger">Delete</button></div>
+  </div>
+</div>
+<hr>
+<button
+  *ngIf="courseService.currentCourse?.isInstructor"
+    class="btn btn-success btn-lg"
+    data-toggle="modal"
+    data-target="#addTopicModal"
+  >Add Topic &nbsp;
+    <i
+      class="fa fa-plus"
+      aria-hidden="true"
+    ></i>
+  </button>
+  <hr>
+<div class="row">
+  <div class="col-lg-3">
+    <app-course-topics></app-course-topics>
+  </div>
+  <div class="col-lg-9">
+    <app-single-topic *ngIf="topicService.currentTopic"></app-single-topic>
+  </div>
+</div>
+
+<div class="modal" id="confirmUnitRegistrationModal" tabindex="-1" role="dialog" aria-labelledby="confirmUnitRegistrationModalTitle"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="confirmUnitRegistrationModalTitle">Course Registration</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Please Confirm Course Registration.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="registerCourse()">Confirm</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="confirmDeleteCourseModal" tabindex="-1" role="dialog" 
+aria-labelledby="confirmDeleteCourseModalTitle"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="confirmDeleteCourseModalTitle">Delete Course</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Please Confirm Course Deletion. Note:// This process is irreversible</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="deleteCourse()">Confirm</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal fade"
+  id="addTopicModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="addTopicModalTitle"
+  aria-hidden="true"
+>
+  <div
+    class="modal-dialog modal-lg"
+    role="document"
+  >
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5
+          class="modal-title"
+          id="addTopicModalTitle"
+        >Add Topic</h5>
+
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div class="modal-body">
+          <app-add-topic></app-add-topic>
+      </div>
+
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-secondary"
+          data-dismiss="modal"
+        >Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal fade"
+  id="chatRoomModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="chatRoomModalTitle"
+  aria-hidden="true"
+>
+  <div
+    class="modal-dialog modal-lg"
+    role="document"
+  >
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5
+          class="modal-title"
+          id="chatRoomModalTitle"
+        >Chat Room</h5>
+
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div class="modal-body">
+          <app-chat></app-chat>
+      </div>
+
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-secondary"
+          data-dismiss="modal"
+        >Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal"
+  id="editCourseModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="editCourseModalTitle"
+  aria-hidden="true"
+>
+  <div
+    class="modal-dialog"
+    role="document"
+  >
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5
+          class="modal-title"
+          id="editCourseModalTitle"
+        >Edit Course</h5>
+
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div class="modal-body">
+          <app-edit-course></app-edit-course>
+      </div>
+
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-secondary"
+          data-dismiss="modal"
+        >Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div
+  class="modal"
+  id="courseImageUploadModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="courseImageUploadModalTitle"
+  aria-hidden="true"
+>
+  <div
+    class="modal-dialog"
+    role="document"
+  >
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5
+          class="modal-title"
+          id="courseImageUploadModalTitle"
+        >Change Course Picture</h5>
+
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <image-upload url="{{imageUrl + this.courseService.currentCourse?.id}}" 
+        [max]="1" (uploadFinished)="onUploadFinished(img)"></image-upload>
+      </div>
+
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-secondary"
+          data-dismiss="modal"
+        >Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,71 @@
+<div class="text-center">
+  <div class="row">
+    <div class="col-lg-6 offset-lg-3">
+      <div class="card">
+        <div class="card-header">
+          <h4 class="card-title">Register</h4>
+        </div>
+        <div class="card-body">
+          <form [formGroup]="form" (ngSubmit)="onSubmit(form)">
+            <div class="form-row">
+              <div class="col">
+                <input type="text" class="form-control" placeholder="First Name" [class.is-invalid]="!form.controls['firstName'].valid && form.controls['firstName'].touched"
+                  [formControl]="form.controls['firstName']">
+              </div>
+              <div class="col">
+                <input type="text" class="form-control" placeholder="Middle Name" [class.is-invalid]="!form.controls['middleName'].valid && form.controls['middleName'].touched"
+                  [formControl]="form.controls['middleName']">
+              </div>
+              <div class="col">
+                <input type="text" class="form-control" placeholder="Last Name" [class.is-invalid]="!form.controls['lastName'].valid && form.controls['lastName'].touched"
+                  [formControl]="form.controls['lastName']">
+              </div>
+            </div>
+            <br>
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="Id Number" [class.is-invalid]="!form.controls['idNumber'].valid && form.controls['idNumber'].touched"
+                [formControl]="form.controls['idNumber']">
+            </div>
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="Phone Number" [class.is-invalid]="!form.controls['phoneNumber'].valid && form.controls['phoneNumber'].touched"
+                [formControl]="form.controls['phoneNumber']">
+            </div>
+            <div class="form-row">
+              <div class="col">
+                <input type="text" class="form-control" placeholder="Address" [class.is-invalid]="!form.controls['address'].valid && form.controls['address'].touched"
+                  [formControl]="form.controls['address']">
+              </div>
+              <div class="col">
+                <input type="text" class="form-control" placeholder="Address Code" [class.is-invalid]="!form.controls['addressCode'].valid && form.controls['addressCode'].touched"
+                  [formControl]="form.controls['addressCode']">
+              </div>
+              <div class="col">
+                <input type="text" class="form-control" placeholder="City" [class.is-invalid]="!form.controls['city'].valid && form.controls['city'].touched"
+                  [formControl]="form.controls['city']">
+              </div>
+            </div>
+            <br>
+            <div class="form-row">
+              <div class="col">
+                <input type="text" class="form-control" placeholder="Email" [class.is-invalid]="!form.controls['email'].valid && form.controls['email'].touched"
+                  [formControl]="form.controls['email']">
+              </div>
+              <div class="col">
+                <input type="password" class="form-control" placeholder="Password" [class.is-invalid]="!form.controls['password'].valid && form.controls['password'].touched"
+                  [formControl]="form.controls['password']">
+              </div>
+              <div class="col">
+                <input type="password" class="form-control" placeholder="Confirm Password" [class.is-invalid]="!form.controls['confirmPassword'].valid && form.controls['confirmPassword'].touched"
+                  [formControl]="form.controls['confirmPassword']">
+              </div>
+            </div>
+            <small *ngIf="cpwd.hasError('invalid')" class="form-text text-danger">The passwords should match</small>
+            <br>
+            <button [disabled]="!form.valid" type="submit" class="btn btn-success">Register</button>
+          </form>
+          <p><em>Already Have account? </em><strong><a [routerLink]="[ '/login' ]">Login</a></strong> </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,18 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-2">
+      <div class="list-group">
+        <a  routerLink="account" routerLinkActive="active" class="list-group-item list-group-item-action">Account</a>
+        <a  routerLink="courses" routerLinkActive="active" class="list-group-item list-group-item-action">Available Courses</a>
+        <a  *ngIf="!authService.isAdmin()" routerLink="mycourses" routerLinkActive="active" class="list-group-item list-group-item-action">My Courses</a>
+        <a  *ngIf="authService.isAdmin()" routerLink="admin-courses" routerLinkActive="active" class="list-group-item list-group-item-action">All Courses</a>
+        <a  routerLink="instructors" routerLinkActive="active" class="list-group-item list-group-item-action">All Instructors</a>
+        <a  *ngIf="authService.isAdmin()" routerLink="requests" routerLinkActive="active" class="list-group-item list-group-item-action">Requests</a>
+        <a  routerLink="notifications" routerLinkActive="active" class="list-group-item list-group-item-action">Notifications</a>
+      </div>
+    </div>
+    <div class="col-lg-10">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

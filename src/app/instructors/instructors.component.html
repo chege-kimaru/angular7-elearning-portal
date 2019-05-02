@@ -1,0 +1,35 @@
+<div>
+  <div class="jumbotron">
+    <h4 class="text-center text-primary">All Instructors</h4>
+  </div>
+</div>
+<div class="row">
+  <div class="col-lg-12" *ngFor="let instructor of authService.instructors">
+    <div class="card">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-sm-4">
+              <img class="rounded mx-auto d-block"
+              alt=""
+              style="width: 200px; height: 200px;"
+               src="{{instructor.imageUrl}}"  alt="...">
+          </div>
+          <div class="col-sm-4">
+              <h5 class="card-title">{{instructor.firstName}}</h5>
+              <p>Registration Date: </p><b>{{instructor.dateAdded}}</b>
+          </div>
+          <div class="col-sm-4">
+              <h6 class="card-subtitle mb-2 text-muted">Courses</h6>
+              <table class="table">
+                <tbody>
+                  <tr *ngFor="let course of instructor.courses"> 
+                    <th class="text-primary" style="cursor: pointer;" routerLink="/home/courses/{{course.id}}">{{course.name}}</th>
+                  </tr>
+                </tbody>
+              </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
